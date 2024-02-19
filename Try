@@ -1,0 +1,104 @@
+# 15.常见模块的使用 keyword random math
+# os sys datetime time
+# calendar turtle
+# import calendar
+
+year = 2024
+cal = calendar.TextCalendar(calendar.SUNDAY)
+创建一个 TextCalendar 对象，设置每周的起始日为星期天
+print(cal.formatyear(year, 2, 1, 1, 3))  # 打印该年份的日历
+year = 2024
+month = 2
+cal = calendar.TextCalendar(calendar.SUNDAY)
+print(type(cal))  # calendar.TextCalendar类   cal的类型！
+print(cal.formatmonth(year, month))
+weekday, days_in_month = calendar.monthrange(2024, 2)
+print("第一天是星期几：", weekday)
+print("该月总共有多少天：", days_in_month)
+
+# 十六，使用open来读写文件
+
+# with open("exercise.txt", "w") as f:
+#     f.write("1223.3213231")
+#     f.write("\n45.54")
+# lines = ['Line 1\n', 'Line 2\n', 'Line 3\n']
+
+# import json
+
+# data = {"name": "John", "age": 30, "city": "New York"}
+
+# with open("data.json", "w") as f:
+#     json.dump(data, f)
+
+# import json
+#
+# with open("data.json", "r") as f:
+#     data = json.load(f)  # load之后跟文件指针！loads之后是具体的数据！
+#
+# print(data, type(data))
+
+# import pickle
+
+# # 创建一个对象
+# data = {'name': 'Alice', 'age': 25, 'city': 'New York'}
+
+# # 将对象序列化为字节流
+# serialized_data = pickle.dumps(data)
+
+# # 将字节流保存到文件
+# with open('data.pickle', 'rb') as file:
+#     print(file.read())
+
+# 十八，oop
+# 定义动物类
+class Animal:
+    def __init__(self, name, sound):
+        self.name = name
+        self.sound = sound
+
+    def make_sound(self):
+        print(f"The {self.name} says {self.sound}")
+
+
+class Dog(Animal):
+    def __init__(self, name, sound):
+        Animal.__init__(self, name, sound)
+
+
+# 创建动物对象
+# dog = Animal("dog", "woof")
+# cat = Animal("cat", "meow")
+
+# 调用方法
+# dog.make_sound()  # 输出对应的叫声！！！！
+# cat.make_sound()  # 输出对应的叫声！！！！
+
+
+# 十九，魔法方法！
+# 就是形式上带有__的方法，在使用上，不需要自己调用，在某些特定的语句中会自动调用！
+# class MyClass:
+#     def __init__(self, name):
+#         self.name = name
+#
+#     def __str__(self):
+#         return f"My name is {self.name}"
+#
+#
+# obj = MyClass("Bob")
+# print(obj)  # 输出：My name is Bob
+
+
+class MyList:
+    def __new__(cls, *args, **kwargs):
+        if hasattr(cls, "obj"):
+            return cls.obj
+        else:
+            obj = object.__new__(cls)
+            setattr(cls, "obj", obj)
+            return obj
+
+    def __init__(self, data):
+        self.data = data
+
+    def __len__(self):
+        return len(self.data)
